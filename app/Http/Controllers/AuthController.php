@@ -37,6 +37,14 @@ class AuthController extends Controller
 
     public function loginPage()
     {
+        if(Auth::user() && Auth::user()->is_admin == 1)
+            {
+                return redirect('/admin/dashboard');
+            }
+            else if(Auth::user() && Auth::user()->is_admin == 0)
+            {
+                return redirect('/student/dashboard');
+            }
         return view('Admin-Panel.auth.login');
     }
 
@@ -52,11 +60,11 @@ class AuthController extends Controller
         $userCredintial = $request->only('email','password');
         if(Auth::attempt($userCredintial))
         {
-            if(auth()->user()->is_admin == 1)
+            if(Auth::user()->is_admin == 1)
             {
                 return redirect('/admin/dashboard');
             }else{
-                return redirect('dashboard');
+                return redirect('/student/dashboard');
             }
         }else{
             return back()->with('error','User email and Password is incorrect.');

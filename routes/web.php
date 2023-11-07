@@ -15,16 +15,19 @@ use App\Http\Controllers\AuthController;
 */
 
 
+
+
+
+Route::get('/register',[AuthController::class,'loadRegister']);
+Route::post('/register',[AuthController::class,'studentRegister'])->name('student-register');
+
+
 Route::get('/',[AuthController::class,'loginPage']);
 Route::get('/login',function(){
     return redirect('/');
 });
 
 Route::post('/login',[AuthController::class,'login'])->name('login');
-
-
-Route::get('/register',[AuthController::class,'loadRegister']);
-Route::post('/register',[AuthController::class,'studentRegister'])->name('student-register');
 
 
 

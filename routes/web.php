@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-Route::get('/',function(){
-    return view('Admin-Panel.auth.register');
+Route::get('/',[AuthController::class,'loginPage']);
+Route::get('/login',function(){
+    return redirect('/');
 });
+
+Route::post('/login',[AuthController::class,'login'])->name('login');
+
+
+Route::get('/register',[AuthController::class,'loadRegister']);
+Route::post('/register',[AuthController::class,'studentRegister'])->name('student-register');
+
+
+
+
+Route::get('/student/dashboard',[AuthController::class,'studentDashboard']);
+Route::get('/admin/dashboard',[AuthController::class,'adminDashboard']);
+
+
+

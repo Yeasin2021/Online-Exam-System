@@ -2,14 +2,13 @@
 <html lang="en">
 
 
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Register</title>
+    <title>Login</title>
     <!-- loader-->
     <link href="{{ asset('dashboard') }}/assets/css/pace.min.css" rel="stylesheet" />
     <script src="{{ asset('dashboard') }}/assets/js/pace.min.js"></script>
@@ -40,15 +39,15 @@
                     </button>
                   </div>
                 @endforeach
-                @if(Session::get('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success !</strong> {{ Session::get('successMessage') }}
+                @if(Session::get('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Opps !</strong> {{ Session::get('error') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                 @php
-                    Session::forget('success')
+                    Session::forget('error')
                 @endphp
 
                 @endif
@@ -56,60 +55,52 @@
             <div class="col-md-4"></div>
         </div>
     </div>
-
     <!-- Start wrapper-->
     <div id="wrapper">
 
         <div class="height-100v d-flex align-items-center justify-content-center">
+
             <div class="card card-authentication1 mb-0">
                 <div class="card-body">
                     <div class="card-content p-2">
                         <div class="text-center">
                             <img src="{{ asset('dashboard') }}/assets/images/logo-icon.png" alt="logo icon">
                         </div>
-                        <div class="card-title text-uppercase text-center py-3">Sign Up</div>
-                        <form method="POST" action="{{ route('student-register') }}">@csrf
+                        <div class="card-title text-uppercase text-center py-3">Sign In</div>
+                        <form method="POST" action="login">@csrf
                             <div class="form-group">
-                                <label for="exampleInputName" class="sr-only">Name</label>
+                                <label for="exampleInputUsername" class="sr-only">Username</label>
                                 <div class="position-relative has-icon-right">
-                                    <input type="text" id="exampleInputName" class="form-control input-shadow"
-                                        placeholder="Enter Your Name" name="name" required>
+                                    <input type="email" id="exampleInputUsername" class="form-control input-shadow"
+                                        placeholder="Enter Email Id" name="email">
                                     <div class="form-control-position">
                                         <i class="icon-user"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmailId" class="sr-only">Email ID</label>
-                                <div class="position-relative has-icon-right">
-                                    <input type="text" id="exampleInputEmailId" class="form-control input-shadow"
-                                        placeholder="Enter Your Email ID" name="email" required>
-                                    <div class="form-control-position">
-                                        <i class="icon-envelope-open"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label for="exampleInputPassword" class="sr-only">Password</label>
                                 <div class="position-relative has-icon-right">
-                                    <input type="text" id="exampleInputPassword" class="form-control input-shadow"
-                                        placeholder="Choose Password" name="password" required>
+                                    <input type="password" id="exampleInputPassword" class="form-control input-shadow"
+                                        placeholder="Enter Password" name="password">
                                     <div class="form-control-position">
                                         <i class="icon-lock"></i>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="icheck-material-white">
-                                    <input type="checkbox" id="user-checkbox" checked="" />
-                                    <label for="user-checkbox">I Agree With Terms & Conditions</label>
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <div class="icheck-material-white">
+                                        <input type="checkbox" id="user-checkbox" checked="" />
+                                        <label for="user-checkbox">Remember me</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6 text-right">
+                                    <a href="authentication-reset-password.html">Reset Password</a>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-light btn-block waves-effect waves-light">Sign
-                                Up</button>
-                            <div class="text-center mt-3">Sign Up With</div>
+                            <button type="submit" class="btn btn-light btn-block">Sign In</button>
+                            <div class="text-center mt-3">Sign In With</div>
 
                             <div class="form-row mt-4">
                                 <div class="form-group mb-0 col-6">
@@ -126,7 +117,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-center py-3">
-                    <p class="text-warning mb-0">Already have an account? <a href="authentication-signin.html"> Sign In
+                    <p class="text-warning mb-0">Do not have an account? <a href="authentication-signup.html"> Sign Up
                             here</a></p>
                 </div>
             </div>
@@ -179,7 +170,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('dashboard') }}/assets/js/jquery.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
+    <script src="{{ asset('dashboard') }}/assets/js/popper.min.js"></script>
     <script src="{{ asset('dashboard') }}/assets/js/bootstrap.min.js"></script>
 
     <!-- Metismenu js -->

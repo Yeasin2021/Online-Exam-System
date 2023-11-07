@@ -72,6 +72,14 @@ class AuthController extends Controller
     }
 
 
+    public function logout(Request $request)
+    {
+        $request->Session->flush();
+        Auth::logout();
+        redirect('/');
+    }
+
+
     public function studentDashboard()
     {
         return view('Admin-Panel.dashboard.studentDashboard');

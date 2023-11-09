@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>This is Student Dashboard</h1>
-    <h4>Logout</h4>
+    <h4><a href="{{ route('logout') }}">Logout</a></h4>
 </body>
 </html>l

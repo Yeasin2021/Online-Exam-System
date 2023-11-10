@@ -10,7 +10,8 @@ class AdminController extends Controller
 {
     public function addSubjectView()
     {
-        return view('Admin-Panel.dashboard.admin.pages.subject');
+        $subjects = Subject::all();
+        return view('Admin-Panel.dashboard.admin.pages.subject',compact('subjects'));
     }
 
 
@@ -24,7 +25,7 @@ class AdminController extends Controller
         );
 
         try{
-            
+
             Subject::create(
                 [
                     'subject'=>$request->subject,

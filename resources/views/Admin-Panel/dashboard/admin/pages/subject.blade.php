@@ -7,6 +7,42 @@
     Add Subject
   </button>
 
+
+<br>
+<br>
+
+
+  {{-- Table  --}}
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body" >
+        <h5 class="card-title">Responsive Table</h5>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($subjects as $subject)
+                <tr>
+                    <th scope="row">{{ $subject->id }}</th>
+                    <th scope="row">{{ $subject->subject }}</th>
+                    <th scope="row">Edit</th>
+                    <th scope="row">Delete</th>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -56,5 +92,5 @@
         });
   </script>
 
-  
+
 @endsection

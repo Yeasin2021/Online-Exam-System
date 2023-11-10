@@ -10,7 +10,7 @@
                 <div class="parent-icon"><i class="zmdi zmdi-view-dashboard"></i></div>
                 <div class="menu-title">Dashboard</div>
             </a>
-            <ul class="">
+            {{-- <ul class="">
                 <li>
                     <a href="index.html"><i class="zmdi zmdi-dot-circle-alt"></i> eCommerce v1</a>
                 </li>
@@ -35,14 +35,14 @@
                 <li>
                     <a href="dashboard-logistics.html"><i class="zmdi zmdi-dot-circle-alt"></i> Logistics</a>
                 </li>
-            </ul>
+            </ul> --}}
         </li>
         <li>
             <a class="has-arrow" href="javascript:void();">
                 <div class="parent-icon"><i class="zmdi zmdi-layers"></i></div>
                 <div class="menu-title">UI Elements</div>
             </a>
-            <ul>
+            {{-- <ul>
                 <li>
                     <a href="ui-typography.html"><i class="zmdi zmdi-dot-circle-alt"></i> Typography</a>
                 </li>
@@ -85,7 +85,7 @@
                 <li>
                     <a href="ui-sweet-alert.html"><i class="zmdi zmdi-dot-circle-alt"></i> Sweet Alerts</a>
                 </li>
-            </ul>
+            </ul> --}}
         </li>
         <li>
             <a class="has-arrow" href="javascript:void();">
@@ -94,7 +94,7 @@
             </a>
             <ul>
                 <li>
-                    <a href="components-range-slider.html"><i class="zmdi zmdi-dot-circle-alt"></i> Range Sliders</a>
+                    <a href="{{ route('admin-subject') }}"><i class="zmdi zmdi-dot-circle-alt"></i> Subjects</a>
                 </li>
                 <li>
                     <a href="components-image-carousel.html"><i class="zmdi zmdi-dot-circle-alt"></i> Image Carousels</a>

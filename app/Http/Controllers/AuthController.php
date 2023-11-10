@@ -88,7 +88,7 @@ class AuthController extends Controller
 
     public function adminDashboard()
     {
-        return view('Admin-Panel.dashboard.admin.adminDashboard');
+        return view('Admin-Panel.dashboard.admin.pages.adminDashboard');
     }
 
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::post('/login',[AuthController::class,'login'])->name('login');
 
 Route::group(['middleware' => ['web','checkAdmin']],function(){
     Route::get('/admin/dashboard',[AuthController::class,'adminDashboard']);
+    Route::get('/admin/subject',[AdminController::class,'addSubjectView'])->name('admin-subject');
+    Route::post('/admin/add-subject',[AdminController::class,'addSubject'])->name('add-subject');
 });
 
 

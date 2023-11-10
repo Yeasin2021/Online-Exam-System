@@ -8,7 +8,7 @@
         <meta content="" name="author" />
         <title>Admin Dashboard</title>
         <!-- loader-->
-        <link href="{{ asset('dashboard') }}/assets/css/pace.min.css" rel="stylesheet" />
+        {{-- <link href="{{ asset('dashboard') }}/assets/css/pace.min.css" rel="stylesheet" /> --}}
         <script src="{{ asset('dashboard') }}/assets/js/pace.min.js"></script>
         <!--favicon-->
         <link href="{{ asset('dashboard') }}/assets/images/favicon.ico" rel="icon" type="image/x-icon" />
@@ -24,19 +24,20 @@
         <link href="{{ asset('dashboard') }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
         <!-- Custom Style-->
         <link href="{{ asset('dashboard') }}/assets/css/app-style.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body class="bg-theme bg-theme1">
         <!-- Start wrapper-->
         <div id="wrapper">
             <!--Start sidebar-wrapper-->
-            @include('Admin-Panel.dashboard.admin.sidebar')
+            @include('Admin-Panel.dashboard.admin.partial.sidebar')
             <!--End sidebar-wrapper--><!--Start topbar header-->
-            @include('Admin-Panel.dashboard.admin.header')
+            @include('Admin-Panel.dashboard.admin.partial.header')
             <!--End topbar header-->
             <div class="clearfix"></div>
             <div class="content-wrapper">
                 <div class="container-fluid">
-                    @include('Admin-Panel.dashboard.admin.breadcumb')
+                    @include('Admin-Panel.dashboard.admin.partial.breadcumb')
                         @yield('content')
                     <!--start overlay-->
                     <div class="overlay"></div>
@@ -49,7 +50,7 @@
             <a class="back-to-top" href="javaScript:void();"><i class="fa fa-angle-double-up"></i></a>
             <!--End Back To Top Button-->
             <!--Start footer-->
-            @include('Admin-Panel.dashboard.admin.footer')
+            @include('Admin-Panel.dashboard.admin.partial.footer')
             <!--End footer-->
             <!--start color switcher-->
             <div class="right-sidebar">
@@ -84,7 +85,7 @@
         </div>
         <!--End wrapper-->
         <!-- Bootstrap core JavaScript-->
-        <script src="{{ asset('dashboard') }}/assets/js/jquery.min.js"></script>
+        {{-- <script src="{{ asset('dashboard') }}/assets/js/jquery.min.js"></script> --}}
         <script src="{{ asset('dashboard') }}/assets/js/popper.min.js"></script>
         <script src="{{ asset('dashboard') }}/assets/js/bootstrap.min.js"></script>
         <!-- simplebar js -->

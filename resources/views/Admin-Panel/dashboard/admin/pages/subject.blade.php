@@ -18,7 +18,7 @@
       <div class="card-body" >
         <h5 class="card-title">Responsive Table</h5>
         <div class="table-responsive">
-          <table class="table">
+          <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -28,9 +28,9 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($subjects as $subject)
+              @foreach ($subjects as $key=>$subject)
                 <tr>
-                    <th scope="row">{{ $subject->id }}</th>
+                    <th scope="row">{{ ++$key }}</th>
                     <th scope="row">{{ $subject->subject }}</th>
                     <th scope="row">Edit</th>
                     <th scope="row">Delete</th>
@@ -55,7 +55,7 @@
           </button>
         </div>
         <div class="modal-body">
-         <input type="text" name="subject" class="form-control" placeholder="Enter Subject Name"/>
+         <input type="text" name="subject" class="form-control" placeholder="Enter Subject Name" required/>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -81,13 +81,15 @@
                         // console.log(data);
                         if(data.success == true)
                         {
-                            // location.reload();
-                            alert(response.success);
+                            // alert(data.success);
+                            $('.table').load(location.href+'   .table');
+
                         }else{
                             alert(data.message);
                         }
                     }
                 });
+
             })
         });
   </script>

@@ -20,7 +20,7 @@ class AdminController extends Controller
         // return $request->all();
         $request->validate(
             [
-                'subject'=>'string|required'
+                'subject'=>'string|required|unique:subjects'
             ]
         );
 
@@ -31,7 +31,12 @@ class AdminController extends Controller
                     'subject'=>$request->subject,
                 ]
             );
-            return response()->json(['success'=>true, 'message'=>'Subject Added Successfully.']);
+            return response()->json(
+                [
+                    'success'=>true,
+                    'message'=>'Subject Added Successfully.',
+
+                ]);
 
         }catch(\Exception $e){
             return response()->json(['success'=>false, 'message'=>$e->getMessage()]);

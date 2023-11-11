@@ -42,4 +42,44 @@ class AdminController extends Controller
             return response()->json(['success'=>false, 'message'=>$e->getMessage()]);
         }
     }
+
+
+    public function updateSubject(Request $request)
+    {
+        // return $request->all();
+        // $request->validate(
+        //     [
+        //         'subject'=>'string|required|unique:subjects,subject'.$request->up_id,
+        //     ]
+        // );
+
+        try{
+
+            Subject::where('id',$request->up_id)->update(
+                [
+                    'subject'=>$request->subject,
+                ]
+            );
+
+            return response()->json(
+                [
+                    'success'=>true,
+                    'message'=>'Subject Added Successfully.',
+
+                ]);
+
+        }catch(\Exception $e){
+            return response()->json(['success'=>false, 'message'=>$e->getMessage()]);
+        }
+    }
+
+
+    public function deleteSubject(Request $request)
+    {
+        Subject::find($request->subject_id)->delete();
+        return response()->json(['status'=>'success']);
+    }
+
+
+
 }

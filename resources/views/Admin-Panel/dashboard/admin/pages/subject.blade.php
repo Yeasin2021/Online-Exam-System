@@ -33,16 +33,22 @@
                     <th scope="row">{{ ++$key }}</th>
                     <th scope="row">{{ $subject->subject }}</th>
                     <th scope="row">
-                    <a class="update_subject_link"
-                    data-toggle="modal"
-                    data-target="#updateModal"
-                    data-id="{{ $subject->id }}"
-                    data-subject="{{ $subject->subject }}"
-                    >
-                    Edit
-                    </a>
+                        <a class="update_subject_link btn btn-success"
+                            data-toggle="modal"
+                            data-target="#updateModal"
+                            data-id="{{ $subject->id }}"
+                            data-subject="{{ $subject->subject }}"
+                            >
+                            Edit
+                        </a>
                     </th>
-                    <th scope="row">Delete</th>
+                    <th scope="row">
+                        <a class="delete_subject_link btn btn-danger"
+                            data-id="{{ $subject->id }}"
+                        >
+                         Delete
+                        </a>
+                    </th>
                 </tr>
               @endforeach
             </tbody>
@@ -189,7 +195,7 @@
 
             })
 
-            // update code
+            // update code for edit page
             $(document).on('click','.update_subject_link',function(){
                 let id = $(this).data('id');
                 let subject = $(this).data('subject');
@@ -200,6 +206,61 @@
                 $("#subject").val(subject);
 
             })
+
+            // update code
+            $("#updateSubject").submit(function(e){
+                e.preventDefault();
+
+                var formData = $(this).serialize();
+                $.ajax({
+                    url:'{{ route('update-subject') }}',
+                    type:'POST',
+                    data:formData,
+                    success:function(data){
+                        // console.log(data);
+                        if(data.success == true)
+                        {
+                            // alert(data.success);
+                            // remove old data from modal's input
+                            $('#updateSubject')[0].reset();
+                            // table reload after data added into table
+                            $('.table').load(location.href+'   .table');
+
+
+                        }else{
+                            alert(data.message);
+                        }
+                    }
+                });
+
+            })
+
+            // Delete Code
+            $(document).on('click','.delete_subject_link',function(){
+                let subject_id = $(this).data('id');
+
+                if(confirm("Are You Want to Sure Delete This Item ?"))
+                {
+                    $.ajax({
+                    url:'{{ route('remove-subject') }}',
+                    type:'POST',
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        subject_id:subject_id
+                    },
+                    success:function(data){
+                        if(data.status == 'success')
+                        {
+                            // table reload after data added into table
+                            $('.table').load(location.href+'   .table');
+                        }
+                       }
+                    });
+
+                }
+
+            })
+
 
         });
   </script>

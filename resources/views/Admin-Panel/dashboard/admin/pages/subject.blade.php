@@ -32,7 +32,16 @@
                 <tr>
                     <th scope="row">{{ ++$key }}</th>
                     <th scope="row">{{ $subject->subject }}</th>
-                    <th scope="row">Edit</th>
+                    <th scope="row">
+                    <a class="update_subject_link"
+                    data-toggle="modal"
+                    data-target="#updateModal"
+                    data-id="{{ $subject->id }}"
+                    data-subject="{{ $subject->subject }}"
+                    >
+                    Edit
+                    </a>
+                    </th>
                     <th scope="row">Delete</th>
                 </tr>
               @endforeach
@@ -43,7 +52,7 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Add Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <form id="addSubject">@csrf
@@ -67,6 +76,90 @@
   </div>
 
 
+   {{-- <!-- Modal-Update -->
+   <div class="modal fade" id="Modal_update" tabindex="-1" role="dialog" aria-labelledby="updateleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <form method="POST" action="/update" >
+          @csrf
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateleModalLabel">Question Update Form</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <label style="padding-left: 20px">Question</label>
+          </div>
+          <input style="visibility: hidden" name="id"/>
+          <div class="row">
+            <div class="col-md-12"><input name="question"  class="form-control"></div>
+          </div>
+          <div class="row">
+              <div class="col-md-6"><label>A:</label></div>
+              <div class="col-md-6"><label>B:</label></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6"><input name="opa" class="form-control" ></div>
+            <div class="col-md-6"><input name="opb" class="form-control" ></div>
+          </div>
+          <div class="row">
+              <div class="col-md-6"><label>C:</label></div>
+              <div class="col-md-6"><label>D:</label></div>
+          </div>
+          <div class="row">
+              <div class="col-md-6"><input name="opc" class="form-control" ></div>
+              <div class="col-md-6"><input name="opd" class="form-control" ></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3"><label>Answer</label>
+                  <select name="ans" class="form-control">
+                      <option value="{{ $question->d }}">{{ $question->answer }}</option>
+                      <option value="a">A</option>
+                      <option value="b">B</option>
+                      <option value="c">C</option>
+                      <option value="d">D</option>
+                  </select>
+              </div>
+              <div class="col-md-9"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Update Questions</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div> --}}
+
+   <!-- UPDATE Modal -->
+   <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <form id="updateSubject">@csrf
+    <input type="hidden" name="up_id" id="up_id" />
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Update Subject Title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+         <input type="text" name="subject" id="subject" class="form-control" placeholder="Update Subject Name" required/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">Update changes</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
+
   <script>
         $(document).ready(function(){
             $("#addSubject").submit(function(e){
@@ -82,7 +175,11 @@
                         if(data.success == true)
                         {
                             // alert(data.success);
+                            // remove old data from modal's input
+                            $('#addSubject')[0].reset();
+                            // table reload after data added into table
                             $('.table').load(location.href+'   .table');
+
 
                         }else{
                             alert(data.message);
@@ -91,6 +188,19 @@
                 });
 
             })
+
+            // update code
+            $(document).on('click','.update_subject_link',function(){
+                let id = $(this).data('id');
+                let subject = $(this).data('subject');
+
+                console.log(subject)
+
+                $("#up_id").val(id);
+                $("#subject").val(subject);
+
+            })
+
         });
   </script>
 

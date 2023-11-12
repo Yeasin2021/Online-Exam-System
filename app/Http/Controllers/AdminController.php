@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Subject;
+use App\Models\Exam;
 
 class AdminController extends Controller
 {
@@ -91,7 +92,42 @@ class AdminController extends Controller
 
     public function examDashBoard()
     {
-       return view('Admin-Panel.dashboard.admin.pages.exam.exam-dashboard');
+       $subjects = Subject::all();
+       return view('Admin-Panel.dashboard.admin.pages.exam.exam-dashboard',['subjects'=>$subjects]);
+    }
+
+    public function addExam(Request $request)
+    {
+        // return $request->all();
+        $request->validate(
+            [
+                'exam'=>'string|required',
+                'date'=>'string|required',
+                'time'=>'string|required',
+                'subject_id'=>'string|required',
+            ]
+        );
+
+        try{
+
+            Exam::create(
+                [
+                    'exam_name'=>$request->exam,
+                    'date'=>$request->date,
+                    'time'=>$request->time,
+                    'subject_id'=>$request->subject_id,
+                ]
+            );
+            return response()->json(
+                [
+                    'success'=>true,
+                    'message'=>'Subject Added Successfully.',
+
+                ]);
+
+        }catch(\Exception $e){
+            return response()->json(['success'=>false, 'message'=>$e->getMessage()]);
+        }
     }
 
 

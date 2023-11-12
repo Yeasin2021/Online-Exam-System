@@ -168,6 +168,7 @@
 
   <script>
         $(document).ready(function(){
+            // add code
             $("#addSubject").submit(function(e){
                 e.preventDefault();
 

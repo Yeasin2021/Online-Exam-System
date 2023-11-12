@@ -107,9 +107,9 @@
 
   <script>
     $(document).ready(function(){
+
         $("#addExam").submit(function(e){
                 e.preventDefault();
-
                 var formData = $(this).serialize();
                 $.ajax({
                     url:'{{ route('admin-exam-post') }}',
@@ -119,25 +119,28 @@
                         if(data.success == true)
                         {
 
-                            // remove old data from modal's input
+
+                            // table reload after data added into table
+                            $('.table').load(location.href+' .table');
+                             // remove old data from modal's input
                             $('#addExam')[0].reset();
                             $('#addExam')[1].reset();
                             $('#addExam')[2].reset();
                             $('#addExam')[3].reset();
-                            // table reload after data added into table
-                            // $('.table').load(location.href+'   .table');
 
 
                         }else{
                             alert(data.message);
+                            }
                         }
-                    }
-                });
+                    });
 
-            })
+                })
 
 
-    });
+
+
+        });
 
 
 </script>

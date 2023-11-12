@@ -8,6 +8,10 @@ use App\Models\Subject;
 
 class AdminController extends Controller
 {
+
+
+    // Subject CURD : 1 step
+
     public function addSubjectView()
     {
         $subjects = Subject::all();
@@ -78,6 +82,16 @@ class AdminController extends Controller
     {
         Subject::find($request->subject_id)->delete();
         return response()->json(['status'=>'success']);
+    }
+
+
+    // Subject CURD END: 1 step
+
+    // EXAM CURD : 2 step
+
+    public function examDashBoard()
+    {
+       return view('Admin-Panel.dashboard.admin.pages.exam.exam-dashboard');
     }
 
 

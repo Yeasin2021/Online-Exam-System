@@ -97,7 +97,7 @@
                     <a href="{{ route('admin-subject') }}"><i class="zmdi zmdi-dot-circle-alt"></i> Subjects</a>
                 </li>
                 <li>
-                    <a href="components-image-carousel.html"><i class="zmdi zmdi-dot-circle-alt"></i> Image Carousels</a>
+                    <a href="{{ route('admin-exam') }}"><i class="zmdi zmdi-dot-circle-alt"></i> Exam</a>
                 </li>
                 <li>
                     <a href="components-grid-layouts.html"><i class="zmdi zmdi-dot-circle-alt"></i> Grid Layouts</a>

@@ -11,6 +11,63 @@
 <br>
 <br>
 
+ {{-- Table  --}}
+ <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body" >
+        <h5 class="card-title">Responsive Table</h5>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Exam</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+            @if (count($exams) > 0)
+                @foreach ($exams as $key=>$exam)
+                    <tr>
+                        <th scope="row">{{ ++$key }}</th>
+                        <th scope="row">{{ $exam->exam_name }}</th>
+                        <th scope="row">{{ $exam->subjects[0]['subject'] }}</th>
+                        <th scope="row">{{ $exam->date }}</th>
+                        <th scope="row">{{ $exam->time }}</th>
+                            {{-- <th scope="row">
+                                <a class="update_subject_link btn btn-success"
+                                    data-toggle="modal"
+                                    data-target="#updateModal"
+                                    data-id="{{ $subject->id }}"
+                                    data-subject="{{ $subject->subject }}"
+                                    >
+                                    Edit
+                                </a>
+                            </th> --}}
+                            {{-- <th scope="row">
+                            <a class="delete_subject_link btn btn-danger"
+                                data-id="{{ $subject->id }}"
+                            >
+                            Delete
+                            </a>
+                        </th> --}}
+                    </tr>
+                @endforeach
+                @else
+                <tr>
+                    <th scope="row">Exam Not Found.</th>
+                </tr>
+            @endif
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
  <!-- Add Modal -->
  <div class="modal fade" id="exampModal" tabindex="-1" aria-labelledby="exampModalLabel" aria-hidden="true">
     <div class="modal-dialog">

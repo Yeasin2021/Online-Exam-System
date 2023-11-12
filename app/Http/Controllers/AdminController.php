@@ -93,7 +93,8 @@ class AdminController extends Controller
     public function examDashBoard()
     {
        $subjects = Subject::all();
-       return view('Admin-Panel.dashboard.admin.pages.exam.exam-dashboard',['subjects'=>$subjects]);
+       $exams = Exam::with('subjects')->get();
+       return view('Admin-Panel.dashboard.admin.pages.exam.exam-dashboard',['subjects'=>$subjects,'exams'=>$exams]);
     }
 
     public function addExam(Request $request)
@@ -129,6 +130,7 @@ class AdminController extends Controller
             return response()->json(['success'=>false, 'message'=>$e->getMessage()]);
         }
     }
+
 
 
 

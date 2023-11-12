@@ -9,4 +9,9 @@ class Exam extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'id','subject_id');
+    }
 }

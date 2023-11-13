@@ -114,6 +114,7 @@
   <div class="modal fade" id="updateExamModal" tabindex="-1" aria-labelledby="updateExamModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <form id="updateExam">@csrf
+        <input name="up_id" id="up_id" type="hidden" />
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="updateExamModalLabel">Exam Update</h5>
@@ -198,6 +199,37 @@
                 $("#subject_id").val(subject);
                 $("#date").val(date);
                 $("#time").val(time);
+
+            })
+
+
+            // update code
+            $("#updateExam").submit(function(e){
+                e.preventDefault();
+
+                var formData = $(this).serialize();
+                $.ajax({
+                    url:'{{ route('admin-update-exam') }}',
+                    type:'POST',
+                    data:formData,
+                    success:function(data){
+                        // console.log(data);
+                        if(data.success == true)
+                        {
+                             // table reload after data added into table
+                             $('.table').load(location.href+' .table');
+                             // remove old data from modal's input
+                            $('#updateExam')[0].reset();
+                            $('#updateExam')[1].reset();
+                            $('#updateExam')[2].reset();
+                            $('#updateExam')[3].reset();
+
+
+                        }else{
+                            alert(data.message);
+                        }
+                    }
+                });
 
             })
 

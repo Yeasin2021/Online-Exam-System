@@ -133,5 +133,38 @@ class AdminController extends Controller
 
 
 
+    public function updateExam(Request $request)
+    {
+        // return $request->all();
+        // $request->validate(
+        //     [
+        //         'subject'=>'string|required|unique:subjects,subject'.$request->up_id,
+        //     ]
+        // );
+
+        try{
+
+            Exam::where('id',$request->up_id)->update(
+                [
+                    'exam_name'=>$request->exam,
+                    'date'=>$request->date,
+                    'time'=>$request->time,
+                    'subject_id'=>$request->subject_id,
+                ]
+            );
+
+            return response()->json(
+                [
+                    'success'=>true,
+                    'message'=>'Subject Added Successfully.',
+
+                ]);
+
+        }catch(\Exception $e){
+            return response()->json(['success'=>false, 'message'=>$e->getMessage()]);
+        }
+    }
+
+
 
 }

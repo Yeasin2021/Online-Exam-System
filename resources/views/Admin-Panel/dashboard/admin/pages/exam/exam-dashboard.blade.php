@@ -53,6 +53,7 @@
                             >
                             Edit
                             </a>
+                            <a href="" class="delete_exam_link btn btn-danger" data-id="{{ $exam->id }}">Delete</a>
                         </th>
 
                     </tr>
@@ -232,6 +233,36 @@
                 });
 
             })
+
+
+            // Delete Code
+            $(document).on('click','.delete_exam_link',function(e){
+                e.preventDefault();
+                let exam_id = $(this).data('id');
+
+                if(confirm("Are You Want to Sure Delete This Item ?"))
+                {
+                    $.ajax({
+                    url:'{{ route('remove-exam') }}',
+                    type:'POST',
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        exam_id:exam_id
+                    },
+                    success:function(data){
+                        if(data.status == 'success')
+                        {
+                            // table reload after data added into table
+                            $('.table').load(location.href+'   .table');
+                        }
+                       }
+                    });
+
+                }
+
+            })
+
+
 
 
 

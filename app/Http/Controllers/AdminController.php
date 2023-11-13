@@ -166,5 +166,11 @@ class AdminController extends Controller
     }
 
 
+    public function deleteExam(Request $request)
+    {
+        Exam::find($request->exam_id)->delete();
+        return response()->json(['status'=>'success']);
+    }
+
 
 }

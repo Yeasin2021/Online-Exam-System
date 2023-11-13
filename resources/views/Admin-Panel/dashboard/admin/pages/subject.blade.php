@@ -237,7 +237,8 @@
             })
 
             // Delete Code
-            $(document).on('click','.delete_subject_link',function(){
+            $(document).on('click','.delete_subject_link',function(e){
+                e.preventDefault();
                 let subject_id = $(this).data('id');
 
                 if(confirm("Are You Want to Sure Delete This Item ?"))

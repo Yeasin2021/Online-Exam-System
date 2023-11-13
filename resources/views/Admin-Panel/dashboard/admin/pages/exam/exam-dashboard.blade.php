@@ -25,9 +25,13 @@
                 <th scope="col">Subject</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
+            @php
+                    // {{ dd($subjects[1]['subject']); }}
+            @endphp
             @if (count($exams) > 0)
                 @foreach ($exams as $key=>$exam)
                     <tr>
@@ -36,23 +40,21 @@
                         <th scope="row">{{ $exam->subjects[0]['subject'] }}</th>
                         <th scope="row">{{ $exam->date }}</th>
                         <th scope="row">{{ $exam->time }}</th>
-                            {{-- <th scope="row">
-                                <a class="update_subject_link btn btn-success"
-                                    data-toggle="modal"
-                                    data-target="#updateModal"
-                                    data-id="{{ $subject->id }}"
-                                    data-subject="{{ $subject->subject }}"
-                                    >
-                                    Edit
-                                </a>
-                            </th> --}}
-                            {{-- <th scope="row">
-                            <a class="delete_subject_link btn btn-danger"
-                                data-id="{{ $subject->id }}"
+                        <th scope="row">
+                            <a href=""
+                            class="update_exam_link btn btn-success"
+                                data-toggle="modal"
+                                data-target="#updateExamModal"
+                                data-id="{{ $exam->id }}"
+                                data-exam="{{ $exam->exam_name }}"
+                                data-subject="{{ $exam->subjects[0]['id'] }}"
+                                data-date="{{ $exam->date }}"
+                                data-time="{{ $exam->time }}"
                             >
-                            Delete
+                            Edit
                             </a>
-                        </th> --}}
+                        </th>
+
                     </tr>
                 @endforeach
                 @else
@@ -105,8 +107,50 @@
     </div>
   </div>
 
+
+
+  {{-- update Modal --}}
+
+  <div class="modal fade" id="updateExamModal" tabindex="-1" aria-labelledby="updateExamModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <form id="updateExam">@csrf
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateExamModalLabel">Exam Update</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <input type="text" name="exam" id="exam_name" class="form-control" placeholder="Enter Exam Name" required/>
+         <br><br>
+         <input type="date" name="date" id="date" class="form-control" min="@php echo date('Y-m-d'); @endphp" required/>
+         <br><br>
+         <input type="time" name="time" id="time" class="form-control"  required/>
+         <br>
+         <br>
+         <select name="subject_id" id="subject_id" required class="p-2 w-100">
+            <option value="">Select Subject</option>
+            @if(count($subjects)>0)
+                @foreach ($subjects as $subject)
+                    <option  value="{{ $subject->id }}" {{ $subject->id == $exam->subject_id ? 'selected' : '' }}>{{ $subject->subject }}</option>
+                @endforeach
+            @endif
+         </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#updateExamModal">Update changes</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
+
   <script>
     $(document).ready(function(){
+
 
         $("#addExam").submit(function(e){
                 e.preventDefault();
@@ -135,12 +179,31 @@
                         }
                     });
 
-                })
+            })
+
+
+            // update code for edit page
+            $(document).on('click','.update_exam_link',function(){
+                let id = $(this).data('id');
+                let exam = $(this).data('exam');
+                let subject = $(this).data('subject');
+                let date = $(this).data('date');
+                let time = $(this).data('time');
+
+                // alert(subject)
+
+
+                $("#up_id").val(id);
+                $("#exam_name").val(exam);
+                $("#subject_id").val(subject);
+                $("#date").val(date);
+                $("#time").val(time);
+
+            })
 
 
 
-
-        });
+    });
 
 
 </script>

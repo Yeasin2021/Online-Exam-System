@@ -19,6 +19,7 @@ class CreateExamsTable extends Migration
             $table->integer('subject_id')->nullable();
             $table->string('date')->nullable();
             $table->string('time')->nullable();
+            $table->integer('attempt')->default(0);
             $table->timestamps();
         });
     }

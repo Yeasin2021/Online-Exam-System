@@ -106,6 +106,7 @@ class AdminController extends Controller
                 'date'=>'string|required',
                 'time'=>'string|required',
                 'subject_id'=>'string|required',
+                'attempt'=>'string|required',
             ]
         );
 
@@ -117,6 +118,7 @@ class AdminController extends Controller
                     'date'=>$request->date,
                     'time'=>$request->time,
                     'subject_id'=>$request->subject_id,
+                    'attempt'=>$request->attempt,
                 ]
             );
             return response()->json(
@@ -150,6 +152,7 @@ class AdminController extends Controller
                     'date'=>$request->date,
                     'time'=>$request->time,
                     'subject_id'=>$request->subject_id,
+                    'attempt'=>$request->attempt,
                 ]
             );
 

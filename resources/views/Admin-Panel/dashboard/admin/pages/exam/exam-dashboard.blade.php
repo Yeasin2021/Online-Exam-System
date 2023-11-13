@@ -25,6 +25,7 @@
                 <th scope="col">Subject</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
+                <th scope="col">Attempt</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -40,6 +41,7 @@
                         <th scope="row">{{ $exam->subjects[0]['subject'] }}</th>
                         <th scope="row">{{ $exam->date }}</th>
                         <th scope="row">{{ $exam->time }}</th>
+                        <th scope="row">{{ $exam->attempt }}</th>
                         <th scope="row">
                             <a href=""
                             class="update_exam_link btn btn-success"
@@ -50,10 +52,11 @@
                                 data-subject="{{ $exam->subjects[0]['id'] }}"
                                 data-date="{{ $exam->date }}"
                                 data-time="{{ $exam->time }}"
+                                data-attempt="{{ $exam->attempt }}"
                             >
                             Edit
                             </a>
-                            <a href="" class="delete_exam_link btn btn-danger" data-id="{{ $exam->id }}">Delete</a>
+                            <a href="" class="delete_exam_link btn btn-danger"  data-id="{{ $exam->id }}">Delete</a>
                         </th>
 
                     </tr>
@@ -88,6 +91,8 @@
          <input type="date" name="date" class="form-control" min="@php echo date('Y-m-d'); @endphp" required/>
          <br><br>
          <input type="time" name="time" class="form-control"  required/>
+         <br><br>
+         <input type="number" name="attempt" min="1" class="form-control"  required/>
          <br>
          <br>
          <select name="subject_id" required class="p-2 w-100" >
@@ -129,6 +134,8 @@
          <input type="date" name="date" id="date" class="form-control" min="@php echo date('Y-m-d'); @endphp" required/>
          <br><br>
          <input type="time" name="time" id="time" class="form-control"  required/>
+         <br><br>
+         <input type="number" name="attempt" min="1" id="attempt" class="form-control"  required/>
          <br>
          <br>
          <select name="subject_id" id="subject_id" required class="p-2 w-100">
@@ -148,6 +155,30 @@
     </form>
     </div>
   </div>
+
+
+
+
+  {{-- <div class="modal fade" id="deleteExamModal" tabindex="-1" aria-labelledby="deleteExamModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <form id="updateExam">@csrf
+        <input name="up_id" id="up_id" type="hidden" />
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteExamModalLabel">Exam Update</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#deleteExamModal">Delete</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div> --}}
 
 
   <script>
@@ -191,6 +222,7 @@
                 let subject = $(this).data('subject');
                 let date = $(this).data('date');
                 let time = $(this).data('time');
+                let attempt = $(this).data('attempt');
 
                 // alert(subject)
 
@@ -200,6 +232,7 @@
                 $("#subject_id").val(subject);
                 $("#date").val(date);
                 $("#time").val(time);
+                $("#attempt").val(attempt);
 
             })
 
